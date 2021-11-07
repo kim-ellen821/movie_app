@@ -1,9 +1,64 @@
-import logo from './logo.svg';
+import React from "react";
+import propTypes from "prop-types";
 
+function Food({ name, picture, rating }) {
+  //console.log(props.fav);
+  return (
+    <div>
+      <h2>I like {name}</h2>
+      <h4>{rating}/5.0</h4>
+      <img src={picture} alt={name} />
+    </div>
+  );
+}
+
+const foodILike = [
+  {
+    id: 1,
+    name: "kimchi",
+    image: "https://img.koreatimes.co.kr/upload/newsV2/images/202106/88dbf0524fd74259b2d00f6cd7341349.jpg/dims/resize/740/optimize",
+    //rating: 4.3
+  },
+  {
+    id: 2,
+    name: "ramen",
+    image: "https://www.elmundoeats.com/wp-content/uploads/2021/02/FP-Quick-30-minutes-chicken-ramen.jpg",
+    rating: 4.5
+  },
+  {
+    id: 3,
+    name: "chicken",
+    image: "https://www.seriouseats.com/thmb/t82X6N4ZwGkFZmWPuCjwT-osL3g=/1500x844/smart/filters:no_upscale()/20210714-potato-starch-fried-chicken-vicky-wasik-seriouseats-20-17e193a6bf274bba9091810a0b18ef89.jpg",
+    rating: 5
+  }
+]
+
+Food.propTypes = {
+  name: propTypes.string.isRequired,
+  picture: propTypes.number.isRequired,
+  rating: propTypes.number
+};
+
+function renderFood(dish) {
+  console.log(dish)
+  return <Food name={dish.name} picture={dish.image} />
+}
 function App() {
   return (
-    <div className="App">
+    <div>
+      {foodILike.map(dish => (
+        <Food
+          key={dish.id}
+          name={dish.name}
+          picture={dish.image}
+          rating={dish.rating}
+        />
+      ))}
     </div>
+    // <div>
+    //   {console.log(foodILike.map(renderFood))}
+    //   {foodILike.map(renderFood)}
+    // </div>
   );
 }
 
